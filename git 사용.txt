@@ -1,0 +1,4 @@
+git status로 상태 확인한 후에,
+추가: git add oMybatis ,
+커밋: git commit -m "spring" ,
+push: git push -u origin master
