@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Studymem">
+	<insert id="apply" parameterType="StudyMem">
+	DECLARE BEGIN
+		insert into studymem values(#{s_num},#{m_id},2);
+		update study set s_limit=s_limit+1 where s_num=#{s_num};
+	END;
+	</insert>
+</mapper>

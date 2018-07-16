@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="StudyPlus">
+  <resultMap id="StudyPlusResult" type="StudyPlus">
+    <result property="s_num" column="s_num"/>
+    <result property="m_id" column="m_id"/>
+    <result property="sm_num" column="sm_num"/>
+    <result property="s_type" column="s_type"/>
+    <result property="s_name" column="s_name"/>
+    <result property="s_comment" column="s_comment"/>
+    <result property="s_startdate" column="s_startdate"/>
+    <result property="s_enddate" column="s_enddate"/>
+    <result property="s_meetday" column="s_meetday"/>
+    <result property="s_meethour" column="s_meethour"/>
+	<result property="s_place" column="s_place"/>
+	<result property="s_memcount" column="s_memcount"/>
+  </resultMap>
+  
+
+
+</mapper>

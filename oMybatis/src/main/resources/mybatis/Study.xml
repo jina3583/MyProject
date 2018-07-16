@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Study">
+  <resultMap id="StudyResult" type="Study">
+    <result property="s_subject" column="s_subject"/>
+    <result property="s_name" column="s_name"/>
+    <result property="s_date" column="s_date"/>
+    <result property="s_date2" column="s_date2"/>
+    <result property="s_person" column="s_person"/>
+    <result property="s_place" column="s_place"/>
+    <result property="s_leader" column="s_leader"/>
+    <result property="s_coment" column="s_coment"/>
+	<result property="s_limit" column="s_limit"/>
+	<result property="s_meetday" column="s_meetday"/>
+	<result property="s_meethour" column="s_meethour"/>
+	<result property="s_num" column="s_num"/>
+	<result property="keyword" column="keyword"/>
+  </resultMap>
+  
+  <select id="list_contest" parameterType="Study" resultMap="StudyResult">
+  	select * from study where s_subject='NCS'
+  </select>
+  
+  <select id="list_job" parameterType="Study" resultMap="StudyResult">
+  	select * from study where s_subject='면접'
+  </select>
+  
+  <select id="study_list" parameterType="Study" resultMap="StudyResult">
+    select * from study where s_subject=#{s_subject}
+  </select>
+  
+  <!-- <select id="study_list2" parameterType="Study" resultMap="StudyResult">
+  	select * from study where s_name || s_place like '%' || #{keyword} || '%'
+  </select> -->
+  
+  <select id="study_list2" parameterType="java.util.HashMap" resultMap="StudyResult">
+  	select * from study where s_subject=#{s_subject} and s_name || s_place like '%' || #{keyword} || '%'
+  </select>
+  
+  <insert id="insert_study" parameterType="Study">
+    insert into study(s_subject,s_name,s_date,s_person,s_place,s_coment,s_meetday,s_date2,s_meethour) values(#{s_subject},#{s_name},#{s_date},#{s_person},#{s_place},#{s_coment},#{s_meetday},#{s_date2},#{s_meethour})
+  </insert>
+  
+<!--   <insert id="apply" parameterType="Study">
+  	update study set s_limit=s_limit+1 where s_leader='김도영1'
+  </insert> -->
+  
+  <select id="place_list" resultMap="StudyResult">
+  	select s_place from study where s_subject=#{s_subject}
+  </select>
+  
+</mapper>

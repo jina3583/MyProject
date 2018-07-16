@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="Emp">
+  <!-- Use type aliases to avoid typing the full classname every time. -->
+  <resultMap id="EmpResult" type="Emp">
+    <result property="empno" column="empno"/>
+    <result property="ename" column="ename"/>
+    <result property="job" column="job"/>
+    <result property="mgr" column="mgr"/>
+    <result property="hiredate" column="hiredate"/>
+    <result property="sal" column="sal"/>
+    <result property="comm" column="comm"/>
+    <result property="deptno" column="deptno"/>
+  </resultMap>
+   <select id="listAll" parameterType="Emp" resultMap="EmpResult">
+      select * from (select rownum rn, a.* from (select * from emp
+    	 order by empno) a) where rn between #{start} and
+    	 #{end}   	
+   </select>
+   
+  <select id="total" resultType="int">
+  	select count(*) from emp
+  </select>
+  
+  <insert id="insert" parameterType="Emp"> 	<!-- 파라미터를 쓸 때 # 사용 -->
+  	insert into emp values (#{empno},#{ename},#{job},#{mgr},#{hiredate},#{sal},#{comm},#{deptno})
+  </insert>
+  
+  <select id="detail" parameterType="int" resultMap="EmpResult">
+  	select * from emp where empno=#{empno} 
+  </select>
+  
+  <update id="update" parameterType="Emp" >
+  	update emp set ename=#{ename}, job=#{job}, mgr=#{mgr}, 
+  	<if test="hiredate!=''">hiredate=#{hiredate},</if>
+  	sal=#{sal},
+  	<if test="comm!=null">comm=#{comm},</if>
+  	deptno=#{deptno} where empno=#{empno}
+  </update>
+  
+  <!-- resultMap, resultType: DTO 사용할 때 -->
+  <select id="selectManager" parameterType="Emp" resultMap="EmpResult">
+  	select * from emp where empno in (select distinct(mgr) from emp where mgr is not null)
+  
+  	<!-- select ename from emp where empno in (select distinct(mgr) from emp where mgr is not null) -->
+  	<!-- select distinct(mgr) from emp where empno in(select empno from emp where mgr is not null) -->
+  </select>
+  
+  <delete id="delete" parameterType="int">
+  	delete emp where empno=#{empno}
+  </delete>
+
+	<insert id="insert2" parameterType="Crawling">
+		insert into tbl_crawling values(crawl_seq.nextval,#{url},#{title},#{content},sysdate)
+	</insert>
+
+</mapper>
