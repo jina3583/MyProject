@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="TBoard">
+  <!-- <resultMap id="TBoardResult" type="TBoard">
+    <result property="tnum" column="tnum"/>
+    <result property="ttitle" column="ttitle"/>
+    <result property="tcontent" column="tcontent"/>
+    <result property="tadmin" column="tadmin"/>
+    <result property="tdate" column="tdate"/>
+    <result property="thit" column="thit"/>
+  </resultMap> -->
+  
+  
+  <select id="board_list" resultType="TBoard">
+  	select * from TBOARD
+  </select>
+  
+  <select id="board_read" resultType="TBoard">
+  	select * from TBOARD
+	where TNUM = #{tnum}
+  </select>
+  
+  <insert id="board_insert" >
+  	insert into TBOARD values(tnum_seq.nextval, #{ttitle}, #{tcontent}, '관리자', sysdate, 0)
+  </insert>
+  
+  
+  
+</mapper>
